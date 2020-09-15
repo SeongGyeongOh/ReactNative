@@ -21,11 +21,12 @@ export default class MainComponent extends Component{
                 <View style={{flex:2, backgroundColor:'blue', flexDirection:'row'}}>
                     {/* 좌우 1:2 */}
                     <View style={{flex:2, backgroundColor:'yellow'}}>
-                        <View style={{position:'absolute', backgroundColor:'grey', width:50, height:50, top:50, left:100}}></View>
+                        <View style={{position:'absolute', backgroundColor:'grey', width:50, height:50, right:0, bottom:0}}></View>
                         <View style={{position:'absolute', backgroundColor:'pink', width:50, height:50, top:70, left:70}}></View>
                     </View>
                     <View style={{flex:1, backgroundColor:'orange'}}></View>
                 </View>
+                    <View style={{width:50, height:50, backgroundColor:'purple', position:"absolute", zIndex:1, borderRadius:25, bottom:10, right:110}}></View>
             </View>
         );
     }
