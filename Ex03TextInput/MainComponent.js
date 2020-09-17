@@ -43,12 +43,9 @@ class MainComponent extends Component{
     }
 
     //화살표 함수 축약형!! 눈에 익혀둘 것
-    btnchange= (value)=> {
-        this.data=value;
-    }
-    clickBtn=()=> {
-        this.setState({msg:this.data}); //더 줄여쓴거 <button>을 읽어봐라!!
-     } 
+    btnchange= value=> this.data=value;
+    clickBtn=()=> this.setState({msg:this.data}); //더 줄여쓴거 <button>을 읽어봐라!!
+
 }
 
 const styles= StyleSheet.create({
