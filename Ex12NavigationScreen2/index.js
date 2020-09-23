@@ -8,6 +8,7 @@ import {name as appName} from './app.json';
 import MainBottomTab from './MainBottomTab';
 import MainDrawer from './MainDrawer';
 import MainMaterialTopTab from './MainMaterialTopTab';
+import MainPractice from './MainPractice';
 
 
-AppRegistry.registerComponent(appName, () => MainDrawer);
+AppRegistry.registerComponent(appName, () => MainPractice);
