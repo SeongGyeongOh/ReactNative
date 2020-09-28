@@ -21,14 +21,20 @@ export default class SignUp extends Component{
                         {
                             this.state.tabs.map(( value, index )=>{
                                 return (
-                                    <TabComponent onPress={()=>{this.setTabIndex(index)}} label={value} key={"Tab"+index} selected={this.state.tabIndex==index}></TabComponent>
+                                    <TabComponent 
+                                        onPress={()=>{this.setTabIndex(index)}} 
+                                        label={value} key={"Tab"+index} 
+                                        selected={this.state.tabIndex==index}>
+                                    </TabComponent>
                                 );
                             })
                         }
                     </View>
 
                     {/* 1-2  */}
-                    <InputComponent placeholder={this.state.tabs[this.state.tabIndex]}></InputComponent>
+                    <InputComponent 
+                        placeholder={this.state.tabs[this.state.tabIndex]}>
+                    </InputComponent>
 
                     {
                         // XML 안의 자바스크립트에서 if문은 사용 불가.. 
@@ -78,7 +84,7 @@ const styles=StyleSheet.create({
 
     contents:{
         flex:1,
-        width:'100%',
+        // width:'100%',
         alignItems:'center',
         padding:32
     },
