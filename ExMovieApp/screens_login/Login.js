@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 import InputComponent from '../components/InputComponent';
+import AsyncStorage from '@react-native-community/async-storage'
 
 export default class Login extends Component{
     render(){
@@ -20,7 +21,8 @@ export default class Login extends Component{
 
                     {/* 1-4 로그인 버튼 */}
                     <View style={{width:"100%", marginBottom:24}}>
-                        <Button title="로그인" color="#3796FE"></Button>
+                        {/* 로그인 버튼을 누르면 - 정보를 저장하고 다음페이지로 전환할 메소드 */}
+                        <Button title="로그인" color="#3796FE" onPress={this.login}></Button>
                     </View>
 
                     {/* 1-5 회원가입 안내글 */}
@@ -35,6 +37,18 @@ export default class Login extends Component{
                 </View>
             </View>
         );
+    }
+
+    // 로그인 버튼 누를 때 실행하는 메소드
+    // async - await로 동기를 맞추자 - 아니면 실제로는 로그인 정보가 서버에 날라가기도 전에 화면이 변경될 가능성이 있다!!!!
+    login= async ()=>{
+        // AsyncStorage에 로그인 정보 영구저장 - 나중에 로그인 할 때 인트로에서 바로 메인으로 넘어가도록...
+        // 원래는 텍스트인풋의 글자를 가져와야 하지만.. 지금은 연습중이니까 아무 글자나 넣자!
+        await AsyncStorage.setItem("email", "android@gyeong");
+
+        // 로그인 후 메인화면인 MovieList를 가진 drawerNavigator로 이동 ㄱㄱ
+        // navigate 대신 replace를 사용해서 한 번 로그인한 후 다시 로그인 화면으로 돌아가지 않도록...
+        this.props.navigation.replace('MainDrawerNav');
     }
 }
 
