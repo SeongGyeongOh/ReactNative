@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Button} from 'react-native';
 import Second2 from './Second2';
+import Second2_2 from './Second2_2';
 
 // !!!! Context : 앱 전체에서 참조할 수 있는 전역변수를 만들 수 있는 React의 API!!!!
 // Context 객체(React클래스의 메소드로 만들 수 있다)
@@ -66,18 +67,42 @@ class First extends Component{
             // 3) 실습 - Context의 Provider로부터 제공된 value를 사용하고 싶다면(반드시 사용해야 하는 것은 아님!!)
             // 반드시 Context의 Consumer(소비자) 컼포넌트를 만들고 그 Consumer 컴포넌ㅌ으 안에 콜백함수를 만들어 이 Consumer 컴포넌트가 보여줄 컴포넌트를 return 해줘야 한다
             // 이 때 Consumer 컴포넌트 안에 만든 콜백함수의 파라미터로 Provider의 value 값을 받을 수 있음
-            <MyContext.Consumer>
-                {/* 이 Consumer 컴포넌트가 보여줄 뷰를 return 하는 콜백 화살표함수 작성 - JS 문법 필요 */}
-                {
-                    (value)=>{ //이 콜백함수의 파라미터로 Provider의 value 값이 전달됨
-                        return(
-                            <View style={{marginVertical:16, padding:16, backgroundColor:'lightgreen'}}>
-                                {/* Provider에서 제공한 value 사용해보기 */}
-                                <Text>First 컴포넌트 : {value.data}</Text>
-                            </View>
-                            
-                        );
+            // <MyContext.Consumer>
+            //     {/* 이 Consumer 컴포넌트가 보여줄 뷰를 return 하는 콜백 화살표함수 작성 - JS 문법 필요 */}
+            //     {
+            //         (value)=>{ //이 콜백함수의 파라미터로 Provider의 value 값이 전달됨
+            //             return(
+            //                 <View style={{marginVertical:16, padding:16, backgroundColor:'lightgreen'}}>
+            //                     {/* Provider에서 제공한 value 사용해보기 */}
+            //                     <Text>First 컴포넌트 : {value.data}</Text>
 
+            //                     {/* 손자 컴포넌트 - 데이터 전달 없음 */}
+            //                     <Second></Second>
+            //                 </View>
+                            
+            //             );
+
+            //         }
+            //     }
+            // </MyContext.Consumer>
+
+            // 5)별도의 .js 손자2 컴포넌트를 만들고 Context 사용해보기(Second2.js)
+            <MyContext.Consumer>
+                {/* 이 Consumer 컴포넌트가 보여줄 뷰를 return 하는 콜백 화살표 함수 작성 -  JS 문법 필요 */}
+                {
+                    (value)=>{
+                        return(
+                            <View style={{marginVertical:16, padding:16, backgroundColor:'grey'}}>
+                                {/* Provider에서 제공한 value 사용해 보기 */}
+                                <Text>First 컴포넌트 : {value.data}</Text>
+
+                                {/* 손자 컴포넌트 - 데이터 전달 없음 */}
+                                <Second></Second>
+
+                                {/* 손자 2 컴포넌트 - 데이터 전달 없음 : import를 잊지 말자!! */}
+                                <Second2_2></Second2_2>
+                            </View>
+                        )
                     }
                 }
             </MyContext.Consumer>
@@ -85,14 +110,34 @@ class First extends Component{
     }
 }
 
-// class Second extends Component{
-//     render(){
-//         return( 
-//             <View style={{marginVertical:16, padding:16, backgroundColor:'blue'}}>
-//                 <Text>Second 컴포넌트 : </Text>
-//                 {/* 손자 컴포넌트 - 데이터 전달 없음 */}
-//                 <Second></Second>
-//             </View>
-//         );
-//     }
-// }
+class Second extends Component{
+    render(){
+        return( 
+            // <View style={{marginVertical:16, padding:16, backgroundColor:'blue'}}>
+            //     <Text>Second 컴포넌트 : </Text>
+            //     {/* 손자 컴포넌트 - 데이터 전달 없음 */}
+            //     <Second></Second>
+            // </View>
+
+            // 3)
+            <MyContext.Consumer>
+                {
+                    // {}와 return 키워드 생략가능
+                    (value)=>(
+                        <View style={{marginVertical:16, padding:16, backgroundColor:'blue'}}>
+                            <Text style={{color:'white'}}>Second 컴포넌트 : {value.data}</Text>
+                            
+                            
+                            {/* // 4) 버튼 눌러 데이터 변경 */}
+                            <View style={{marginTop:16}}>
+                                <Button title="changeData" color="orange" onPress={()=>value.changeData('Nice')}></Button>
+                            </View>
+                        </View>
+
+                        
+                    )
+                }
+            </MyContext.Consumer>
+        );
+    }
+}
